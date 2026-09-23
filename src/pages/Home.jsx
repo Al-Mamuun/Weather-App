@@ -1,9 +1,7 @@
 import { useState } from "react";
 import LocationModal from "../components/LocationModal";
 
-
 function Home() {
-
   const [click, setClick] = useState(false);
   console.log(click);
   return (
@@ -31,4 +29,4 @@ function Home() {
   );
 }
 
-export default Home
+export default Home;
