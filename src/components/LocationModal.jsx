@@ -1,24 +1,49 @@
 import { X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { getGeolocation } from "../services/get-geolocation";
 
 const LocationModal = ({ onClose }) => {
+  const navigate = useNavigate();
   const [city, setCity] = useState("");
-  const handleSubmit = (e) => {
+  const [error, setError] = useState("");
+  const goToPage = (location) => {
+    navigate("/weather", { state: { location } });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const value = city.trim();
     // console.log(value);
-    getGeolocation(value);
+    if (!value) {
+      setError("Please enter a city name");
+      return;
+    }
+    try {
+      const location = await getGeolocation(value);
+      // console.log(result);
+      if (!location) {
+        setError("Geocoding request failed!");
+      }
+      goToPage(location);
+    } catch (error) {
+      setError(error);
+    }
   };
 
   const handleGeoLocations = () => {
+    if (!navigator.geolocation) {
+      setError("Geo locations not found!");
+      return;
+    }
     navigator.geolocation.getCurrentPosition(
       (positions) => {
         const { latitude, longitude } = positions.coords;
-        console.log({ latitude, longitude });
+        //   console.log({latitude,longitude});
+        goToPage({ name: "Your Locations", lat: latitude, lon: longitude });
       },
       (error) => {
-        console.log(error);
+        setError(error.message);
       },
       {
         timeout: 10000,
@@ -28,7 +53,7 @@ const LocationModal = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-gray-950/60">
-      <div className="h-75 p-5 rounded-2xl w-80 bg-gray-100 shadow-2xl">
+      <div className="h-[300px] p-5 rounded-2xl w-[400px] bg-gray-100 shadow-2xl">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-medium">Where are you today?</h2>
           <button onClick={onClose} className="cursor-pointer">
@@ -64,6 +89,10 @@ const LocationModal = ({ onClose }) => {
           >
             Use My Locations
           </button>
+        </div>
+
+        <div className="text-center">
+          {error && <p className="text-red-600 text-md font-medium">{error}</p>}
         </div>
       </div>
     </div>
