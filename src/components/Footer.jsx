@@ -1,3 +1,5 @@
+import { CloudSun } from "lucide-react";
+
 function Footer() {
   return (
     <footer className="bg-slate-900 text-white">
@@ -6,7 +8,7 @@ function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Logo & Description */}
           <div className="flex items-center gap-3">
-            <span className="text-2xl">🌤️</span>
+            <CloudSun size={26} strokeWidth={1.8} aria-hidden="true" />
 
             <div>
               <h2 className="text-lg font-bold">WeatherApp</h2>

@@ -1,3 +1,4 @@
+import { CloudSun } from "lucide-react";
 import { Link, NavLink } from "react-router";
 
 function Navbar() {
@@ -9,7 +10,7 @@ function Navbar() {
           to="/"
           className="flex items-center gap-2 text-2xl font-bold tracking-tight hover:opacity-90 transition"
         >
-          <span className="text-3xl">🌤️</span>
+          <CloudSun size={30} strokeWidth={1.8} aria-hidden="true" />
           <span>WeatherApp</span>
         </Link>
 

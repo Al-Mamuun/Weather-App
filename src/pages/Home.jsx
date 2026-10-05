@@ -1,4 +1,4 @@
-
+import { CloudSun, Droplets, Globe2, Thermometer, Wind } from "lucide-react";
 import { useState } from "react";
 import LocationModal from "../components/LocationModal";
 
@@ -7,13 +7,11 @@ const Home = () => {
 
   return (
     <div className="flex-1 bg-linear-to-br from-sky-50 via-white to-blue-100 flex items-center justify-center px-4 py-10">
-
       <div className="w-full max-w-5xl text-center">
-
         {/* Weather Icon */}
         <div className="flex justify-center mb-6">
           <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-xl shadow-sky-100">
-            <span className="text-5xl">🌤️</span>
+            <CloudSun size={52} strokeWidth={1.8} className="text-sky-500" aria-hidden="true" />
           </div>
         </div>
 
@@ -38,21 +36,21 @@ const Home = () => {
           shadow-lg shadow-sky-200
           hover:shadow-xl hover:-translate-y-1
           active:translate-y-0
-          transition-all duration-300 cursor-pointer"
+          transition-all duration-300 cursor-pointer inline-flex items-center gap-2"
         >
-          🌍 Check Weather
+          <Globe2 size={21} strokeWidth={2.2} aria-hidden="true" />
+          Check Weather
         </button>
 
         {/* Features */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl mx-auto mt-14">
-
           {/* Temperature */}
           <div className="bg-white rounded-2xl p-6 shadow-md border border-sky-100 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-            <div className="text-3xl mb-3">🌡️</div>
+            <div className="flex justify-center text-sky-500 mb-3" aria-hidden="true">
+              <Thermometer size={34} strokeWidth={1.8} />
+            </div>
 
-            <h3 className="text-lg font-bold text-slate-700">
-              Temperature
-            </h3>
+            <h3 className="text-lg font-bold text-slate-700">Temperature</h3>
 
             <p className="text-sm text-slate-400 mt-2">
               Know the current temperature of your city.
@@ -61,11 +59,11 @@ const Home = () => {
 
           {/* Wind */}
           <div className="bg-white rounded-2xl p-6 shadow-md border border-sky-100 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-            <div className="text-3xl mb-3">💨</div>
+            <div className="flex justify-center text-sky-500 mb-3" aria-hidden="true">
+              <Wind size={34} strokeWidth={1.8} />
+            </div>
 
-            <h3 className="text-lg font-bold text-slate-700">
-              Wind
-            </h3>
+            <h3 className="text-lg font-bold text-slate-700">Wind</h3>
 
             <p className="text-sm text-slate-400 mt-2">
               Check wind speed and direction easily.
@@ -74,29 +72,25 @@ const Home = () => {
 
           {/* Humidity */}
           <div className="bg-white rounded-2xl p-6 shadow-md border border-sky-100 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-            <div className="text-3xl mb-3">💧</div>
+            <div className="flex justify-center text-sky-500 mb-3" aria-hidden="true">
+              <Droplets size={34} strokeWidth={1.8} />
+            </div>
 
-            <h3 className="text-lg font-bold text-slate-700">
-              Humidity
-            </h3>
+            <h3 className="text-lg font-bold text-slate-700">Humidity</h3>
 
             <p className="text-sm text-slate-400 mt-2">
               Get the latest humidity information.
             </p>
           </div>
-
         </div>
 
         {/* Bottom Text */}
         <p className="mt-10 text-sm text-slate-400">
-          🌦️ Simple • Fast • Reliable Weather Information
+          Simple • Fast • Reliable Weather Information
         </p>
 
         {/* Modal */}
-        {click && (
-          <LocationModal onClose={() => setClick(false)} />
-        )}
-
+        {click && <LocationModal onClose={() => setClick(false)} />}
       </div>
     </div>
   );
